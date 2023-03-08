@@ -51,10 +51,10 @@ def sumayresta():
         if mono1[2] == mono2[2]:
             print(f'{mono1[0]+mono2[0]}{mono1[1]}{mono1[2]}')
             
-        else: # si no son semejantes, m23 m9 1taco pg
+        else: # si no son semejantes 
             operador = '+'
             if mono2[0] < 0: # verificamos si el elemento del monomio es negativo
-                operador = ''
+                operador = '' # si lo es, asignamos un operador
             print(f'{mono1[0]}{mono1[1]}{mono1[2]}{operador}{mono2[0]}{mono2[1]}{mono2[2]}')
 
     else:
