@@ -1,11 +1,12 @@
 from monomios import menuMonomios
+import os
+full_path = os.path.realpath(__file__)
+path, filename = os.path.split(full_path)
 
 opciones = [1,2,3,4,5]
-cant_MS = 0 # cantidad de monomios semejnates utilzados
-cant_MNS = 0 # cantidad de monomios no semenjantes utilizados
-cant_PO = 0 # cantidad de polinomios ordenados utilziados
-cant_PNO = 0 # cantidad de polinomios no ordenados utilizados
-
+resultados = open(path+"\\resultados.txt", "w")
+resultados.write("0")
+resultados.close()
 
 def menu():
     print("1) Monomios"+
@@ -20,13 +21,13 @@ def menu():
         menuMonomios()
         menu()
     elif opcion == 2:
-        return
+        pass
     elif opcion == 3:
-        return
+        pass
     elif opcion == 4:
-        return
+        pass
     elif opcion == 5:
-        return
+        pass
 
 
 if __name__ == '__main__':
