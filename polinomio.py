@@ -31,7 +31,7 @@ def menuPolinomios():
             elif opcionM == 2:
                 multiplicacionM()
             elif opcion == 3:
-                print("No se pudo realizar")
+                multiplicacionP()
             else:
                 print("Opcion invalida")
             input("Enter para continuar...")
@@ -88,8 +88,6 @@ def suma():
         p2 = input("Ingrese el nombre del segundo polinomio: ")
         a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
         a2 = open(path+"\Archivos"+f"\{p2}.txt", "r") # archivo 2
-        esOrdenado2(a1)
-        esOrdenado2(a2)
         poli1 = ordenar(obtener(a1))
         poli2 = ordenar(obtener(a2))
         aux = []
@@ -110,6 +108,8 @@ def suma():
                 operador = ''
             res += f'{operador}{i[0]}{i[1]}{i[2]}'
         print(res[1:])
+        # esOrdenado2(a1)
+        # esOrdenado2(a2)
 
     except FileNotFoundError:
         print("No existe este archivo")
@@ -120,8 +120,8 @@ def resta():
         p2 = input("Ingrese el nombre del segundo polinomio: ")
         a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
         a2 = open(path+"\Archivos"+f"\{p2}.txt", "r") # archivo 2
-        esOrdenado2(a1)
-        esOrdenado2(a2)
+        # esOrdenado2(a1)
+        # esOrdenado2(a2)
         poli1 = ordenar(obtener(a1))
         poli2 = ordenar(obtener(a2))
         aux = []
@@ -152,6 +152,7 @@ def multiplicacionN(): # Multiplicacion numero por polinomio
         p1 = input("Ingrese el nombre del primer polinomio: ")
         num = int(input("Ingrese el numero a multiplicar: "))
         a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
+        # esOrdenado2(a1)
         poli1 = ordenar(obtener(a1))
         for polinomio in poli1:
             polinomio[0] *= num
@@ -173,6 +174,7 @@ def multiplicacionM(): # Multiplicacion monomio por polinomio
         m1 = input("Ingrese el nombre del archivo del monomio: ")
         a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
         m1 = open(path+"\Archivos"+f'\{m1}.txt', "r") # abriendo archivo del monomio
+        # esOrdenado2(a1)
         poli1 = ordenar(obtener(a1))
         mono1 = m1.readline().split(";")
         for polinomio in poli1:
@@ -190,10 +192,37 @@ def multiplicacionM(): # Multiplicacion monomio por polinomio
     except FileNotFoundError:
         print("No existe este archivo")
 
+def multiplicacionP():
+    try:
+        p1 = input("Ingrese el nombre del archivo del polinomio: ")
+        p2 = input("Ingrese el nombre del archivo del monomio: ")
+        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
+        a2 = open(path+"\Archivos"+f'\{p2}.txt', "r") # abriendo archivo del polinomio
+        poli1 = ordenar(obtener(a1))
+        poli2 = ordenar(obtener(a2))
+        lista = []
+        for poli_1 in range(len(poli1)):
+            for poli_2 in range(len(poli2)):
+                lista.append([poli1[poli_1][0]*poli2[poli_2][0],'x',poli1[poli_1][2]+poli2[poli_2][2]])
+        # listaNueva = []
+        # for i in range(len(lista)):
+        #     for x in range(1, len(lista)-1):
+        #         if lista[i][2] == lista[x][2]:
+        #             a = lista[i][2] + lista[x][2]
+        #             listaNueva.append(a)
+
+        
+        print(lista)
+
+    except FileNotFoundError:
+        print("No existe este archivo")
+multiplicacionP()
+
 def gradoPolinomio():
     try:
         p1 = input("Ingrese el nombre del archivo del polinomio: ")
         a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
+        # esOrdenado2(a1)
         poli = ordenar(obtener(a1))
         grado = poli[0][2]
         print("El grado del polinomio seleccionado es: ", grado)
@@ -283,9 +312,8 @@ def resultadoI(): # cantidad de polinomios incompletos
     r.write(o[1::])
     r.close()
 
-def esOrdenado2(p):
-    p = open(path+"\Archivos"+f"\{p}.txt", "r") # abriendo archivo del polinomio
-    polinomio = obtener(p)
+def esOrdenado2(archivo):
+    polinomio = obtener(archivo)
     copia = ordenar(polinomio)
     grado = copia[0][2]
     polinomio = polinomio[::-1]

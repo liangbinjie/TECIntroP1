@@ -11,6 +11,7 @@ resultados.write("0;0;0;0")
 resultados.close()
 
 def menu():
+    print("Menu de operaciones monomiales y polinomiales")
     print("1) Monomios"+
       "\n2) Polinomios"+
       "\n3) Reportes"+
