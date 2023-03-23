@@ -50,12 +50,43 @@ def menuMonomios():
             print("Opcion invalida, ingrese nuevamente")
             opcion = int(input("> "))
 
+def semejante():
+    a = open('resultados.txt', "r")
+    linea = a.readline().strip().split(";")
+    for i in range(len(linea)):
+        linea[i] = int(linea[i])
+
+    linea[0] = linea[0] + 1
+
+    o = ""
+    for i in linea:
+        o += ";"+str(i)
+
+    r = open("resultados.txt", "w")
+    r.write(o[1::])
+    r.close()
+
+def noSemejante():
+    a = open('resultados.txt', "r")
+    linea = a.readline().strip().split(";")
+    for i in range(len(linea)):
+        linea[i] = int(linea[i])
+
+    linea[1] = linea[1] + 1
+
+    o = ""
+    for i in linea:
+        o += ";"+str(i)
+
+    r = open("resultados.txt", "w")
+    r.write(o[1::])
+    r.close()
 
 def suma():
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
-        print(path+"\Archivos"+f"\{m1}.txt")
+        
         a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
         a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
@@ -64,9 +95,11 @@ def suma():
         mono2[0], mono2[2] = int(mono2[0]), int(mono2[2])
         print(mono1, "+", mono2)
         if mono1[2] == mono2[2]:
+            semejante()
             print(f'{mono1[0]+mono2[0]}{mono1[1]}{mono1[2]}')
             
         else: # si no son semejantes 
+            noSemejante()
             operador = '+'
             if mono2[0] < 0: # verificamos si el elemento del monomio es negativo
                 operador = '' # si lo es, no le asignamos un operador
@@ -74,7 +107,6 @@ def suma():
 
     except FileNotFoundError:
         print("Archivo no existe")
-
 
 def resta():
     try:
@@ -88,9 +120,11 @@ def resta():
         mono2[0], mono2[2] = int(mono2[0]), int(mono2[2])
         print(mono1, "-", mono2)
         if mono1[2] == mono2[2]:
+            semejante()
             print(f'{mono1[0]-mono2[0]}{mono1[1]}{mono1[2]}')
             
         else: # si no son semejantes 
+            noSemejante()
             operador = '-'
             if mono2[0] < 0: # verificamos si el elemento del monomio es negativo
                 operador = '+' # si lo es, no le asignamos un operador
@@ -100,9 +134,7 @@ def resta():
     except FileNotFoundError:
         print("Archivo no existe")
 
-# resta()
-        
-def multiplicacionN():
+def multiplicacionN(): # mutliplicacion por numero y monomio
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
@@ -131,6 +163,10 @@ def multiplicacionM():
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
         mono2[0], mono2[2] = int(mono2[0]), int(mono2[2])
+        if mono1[2] == mono2[0]:
+            semejante()
+        else:
+            noSemejante()
         print(mono1, "*", mono2)
         print(f'{mono1[0]*mono2[0]}{mono1[1]}{mono1[2]+mono2[2]}')
 
@@ -147,6 +183,10 @@ def division():
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
         mono2[0], mono2[2] = int(mono2[0]), int(mono2[2])
+        if mono1[2] == mono2[0]:
+            semejante()
+        else:
+            noSemejante()
         print(mono1, "/", mono2)
         print(f'{mono1[0]//mono2[0]}{mono1[1]}{mono1[2]-mono2[2]}')
 
