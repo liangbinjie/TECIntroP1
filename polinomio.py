@@ -1,6 +1,3 @@
-import os
-full_path = os.path.realpath(__file__)
-path, filename = os.path.split(full_path)
 
 
 def menuPolinomios():
@@ -30,7 +27,7 @@ def menuPolinomios():
                 multiplicacionN()
             elif opcionM == 2:
                 multiplicacionM()
-            elif opcion == 3:
+            elif opcionM == 3:
                 multiplicacionP()
             else:
                 print("Opcion invalida")
@@ -86,8 +83,8 @@ def suma():
     try:
         p1 = input("Ingrese el nombre del primer polinomio: ")
         p2 = input("Ingrese el nombre del segundo polinomio: ")
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{p2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{p2}.txt", "r") # archivo 2
         poli1 = ordenar(obtener(a1))
         poli2 = ordenar(obtener(a2))
         aux = []
@@ -108,8 +105,7 @@ def suma():
                 operador = ''
             res += f'{operador}{i[0]}{i[1]}{i[2]}'
         print(res[1:])
-        # esOrdenado2(a1)
-        # esOrdenado2(a2)
+
 
     except FileNotFoundError:
         print("No existe este archivo")
@@ -118,8 +114,8 @@ def resta():
     try:
         p1 = input("Ingrese el nombre del primer polinomio: ")
         p2 = input("Ingrese el nombre del segundo polinomio: ")
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{p2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{p2}.txt", "r") # archivo 2
         # esOrdenado2(a1)
         # esOrdenado2(a2)
         poli1 = ordenar(obtener(a1))
@@ -151,7 +147,7 @@ def multiplicacionN(): # Multiplicacion numero por polinomio
     try:
         p1 = input("Ingrese el nombre del primer polinomio: ")
         num = int(input("Ingrese el numero a multiplicar: "))
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # archivo 1
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # archivo 1
         # esOrdenado2(a1)
         poli1 = ordenar(obtener(a1))
         for polinomio in poli1:
@@ -172,8 +168,8 @@ def multiplicacionM(): # Multiplicacion monomio por polinomio
     try:
         p1 = input("Ingrese el nombre del archivo del polinomio: ")
         m1 = input("Ingrese el nombre del archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
-        m1 = open(path+"\Archivos"+f'\{m1}.txt', "r") # abriendo archivo del monomio
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
+        m1 = open("Archivos"+f'\{m1}.txt', "r") # abriendo archivo del monomio
         # esOrdenado2(a1)
         poli1 = ordenar(obtener(a1))
         mono1 = m1.readline().split(";")
@@ -196,32 +192,45 @@ def multiplicacionP():
     try:
         p1 = input("Ingrese el nombre del archivo del polinomio: ")
         p2 = input("Ingrese el nombre del archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
-        a2 = open(path+"\Archivos"+f'\{p2}.txt', "r") # abriendo archivo del polinomio
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
+        a2 = open("Archivos"+f'\{p2}.txt', "r") # abriendo archivo del polinomio
         poli1 = ordenar(obtener(a1))
         poli2 = ordenar(obtener(a2))
         lista = []
         for poli_1 in range(len(poli1)):
             for poli_2 in range(len(poli2)):
                 lista.append([poli1[poli_1][0]*poli2[poli_2][0],'x',poli1[poli_1][2]+poli2[poli_2][2]])
-        # listaNueva = []
-        # for i in range(len(lista)):
-        #     for x in range(1, len(lista)-1):
-        #         if lista[i][2] == lista[x][2]:
-        #             a = lista[i][2] + lista[x][2]
-        #             listaNueva.append(a)
+        similar = {}
+        for term in lista:
+            if term[2] in similar:
+                similar[term[2]] += term[0]
+            else:
+                similar[term[2]] = term[0]
+        res = []
+        for term in lista:
+            if term[2] in similar:
+                res.append([similar[term[2]], term[1], term[2]])
+                similar.pop(term[2])
+        res = ordenar(res)
+        out = ""
+        for term in res:
+            op = '+'
+            if term[0] < 0:
+                op = ''
+            out += f'{op}{term[0]}x{term[2]}'
 
-        
-        print(lista)
+        if out[1] == '-':
+            print(out)
+        else:
+            print(out[1:])
 
     except FileNotFoundError:
         print("No existe este archivo")
-multiplicacionP()
 
 def gradoPolinomio():
     try:
         p1 = input("Ingrese el nombre del archivo del polinomio: ")
-        a1 = open(path+"\Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
+        a1 = open("Archivos"+f"\{p1}.txt", "r") # abriendo archivo del polinomio
         # esOrdenado2(a1)
         poli = ordenar(obtener(a1))
         grado = poli[0][2]
@@ -233,7 +242,7 @@ def gradoPolinomio():
 def esOrdenado():
     try:
         p = input("Ingrese el nombre del archivo del polinomio: ")
-        p = open(path+"\Archivos"+f"\{p}.txt", "r") # abriendo archivo del polinomio
+        p = open("Archivos"+f"\{p}.txt", "r") # abriendo archivo del polinomio
         polinomio = obtener(p)
         copia = ordenar(polinomio)
         grado = copia[0][2]
@@ -247,11 +256,14 @@ def esOrdenado():
                 pass
             else:
                 resultadoI()
+                print(False)
                 return False
         if len(lista) > len(polinomio):
             resultadoI()
+            print(False)
             return False
         resultadoO()
+        print(True)
         return True 
 
     except FileNotFoundError:
@@ -260,7 +272,7 @@ def esOrdenado():
 def esCompleto(): # funcion para verificar si es completo el polinomio
     try:
         p = input("Ingrese el nombre del archivo del polinomio: ")
-        p = open(path+"\Archivos"+f"\{p}.txt", "r") # abriendo archivo del polinomio
+        p = open("Archivos"+f"\{p}.txt", "r") # abriendo archivo del polinomio
         polinomio = obtener(p)
         copia = ordenar(polinomio)
         grado = copia[0][2]
@@ -275,12 +287,15 @@ def esCompleto(): # funcion para verificar si es completo el polinomio
             else:
                 print(f'Falta x{i+1}')
                 resultadoI()
+                print(False)
                 return False
         if len(lista) > len(polinomio):
             print("Falta x0")
             resultadoI()
+            print(False)
             return False
         resultadoO()
+        print(True)
         return True 
 
     except FileNotFoundError:
@@ -311,24 +326,3 @@ def resultadoI(): # cantidad de polinomios incompletos
     r = open("resultados.txt", "w")
     r.write(o[1::])
     r.close()
-
-def esOrdenado2(archivo):
-    polinomio = obtener(archivo)
-    copia = ordenar(polinomio)
-    grado = copia[0][2]
-    polinomio = polinomio[::-1]
-    lista = []
-    for i in range(grado+1):
-        lista = [i] + lista
-
-    for i in range(len(polinomio)):
-        if polinomio[i][2] == lista[i]:
-            pass
-        else:
-            resultadoI()
-            return False
-    if len(lista) > len(polinomio):
-        resultadoI()
-        return False
-    resultadoO()
-    return True 

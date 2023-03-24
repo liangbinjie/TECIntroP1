@@ -87,8 +87,8 @@ def suma():
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
         
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
@@ -112,8 +112,8 @@ def resta():
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
@@ -138,8 +138,8 @@ def multiplicacionN(): # mutliplicacion por numero y monomio
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
@@ -157,8 +157,8 @@ def multiplicacionM():
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
@@ -177,8 +177,8 @@ def division():
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         m2 = input("Ingrese el nombre del segundo archivo del monomio: ")
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
-        a2 = open(path+"\Archivos"+f"\{m2}.txt", "r") # archivo 2
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a2 = open("Archivos"+f"\{m2}.txt", "r") # archivo 2
         mono1 = a1.readline().split(";")
         mono2 = a2.readline().split(";")
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
@@ -197,7 +197,7 @@ def potencia():
     try:
         m1 = input("Ingrese el nombre del primer archivo del monomio: ")
         potencia = int(input("Ingrese el valor de potencia: "))
-        a1 = open(path+"\Archivos"+f"\{m1}.txt", "r") # archivo 1
+        a1 = open("Archivos"+f"\{m1}.txt", "r") # archivo 1
         mono1 = a1.readline().split(";")
        
         mono1[0], mono1[2] = int(mono1[0]), int(mono1[2])
